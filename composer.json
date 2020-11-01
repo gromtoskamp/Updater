@@ -11,7 +11,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "Groskampweb\\ExtendedRepositories": "dev-master"
+    "groskampweb/module-extendedrepositories": "^1.0.3"
   },
   "autoload": {
     "psr-4": {
