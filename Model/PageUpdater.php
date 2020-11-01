@@ -38,11 +38,12 @@ class PageUpdater
      * @param string $title
      * @param string $urlKey
      * @param string $pageLayout
+     * @param int $storeId
      * @throws Exception
      */
-    public function create(string $assetName, string $title, string $urlKey, string $pageLayout = '1column'): void
+    public function create(string $assetName, string $title, string $urlKey, string $pageLayout = '1column', int $storeId = 0): void
     {
-        $this->createPage->createPage($assetName, $title, $urlKey, $pageLayout);
+        $this->createPage->createPage($assetName, $title, $urlKey, $pageLayout, $storeId);
     }
 
     /**

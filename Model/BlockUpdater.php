@@ -37,11 +37,12 @@ class BlockUpdater
      * @param string $assetName
      * @param string $title
      * @param string $identifier
+     * @param int $storeId
      * @throws Exception
      */
-    public function create(string $assetName, string $title, string $identifier): void
+    public function create(string $assetName, string $title, string $identifier, int $storeId = 0): void
     {
-        $this->createBlock->createBlock($assetName, $title, $identifier);
+        $this->createBlock->createBlock($assetName, $title, $identifier, $storeId);
     }
 
     /**

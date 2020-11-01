@@ -5,6 +5,7 @@ namespace Groskampweb\Updater\Model\Page;
 use Exception;
 use Groskampweb\ExtendedRepositories\Repository\PageRepository;
 use Groskampweb\Updater\Helper\AssetFetcher;
+use Magento\Cms\Model\Page;
 use Magento\Cms\Model\PageFactory;
 
 class CreatePage
@@ -31,21 +32,24 @@ class CreatePage
      * @param string $pageTitle
      * @param string $pageUrlKey
      * @param string $pageLayout
+     * @param int $storeId
      * @throws Exception
      */
-    public function createPage(string $assetName, string $pageTitle, string $pageUrlKey, string $pageLayout = '1column'): void
+    public function createPage(string $assetName, string $pageTitle, string $pageUrlKey, string $pageLayout = '1column', int $storeId = 0): void
     {
         if (!empty($this->pageRepository->getByIdentifier($pageUrlKey))) {
             return;
         }
 
         $pageHtml = $this->assetFetcher->getAssetHtml($assetName);
+        /** @var Page $page */
         $page = $this->pageFactory->create();
 
-        $page->setTitle($pageTitle)
-            ->setIdentifier($pageUrlKey)
-            ->setPageLayout($pageLayout)
-            ->setContent($pageHtml);
+        $page->setTitle($pageTitle);
+        $page->setIdentifier($pageUrlKey);
+        $page->setPageLayout($pageLayout);
+        $page->setContent($pageHtml);
+        $page->setStoreId($storeId);
 
         //TODO: log possible exceptions.
         $this->pageRepository->save($page);
