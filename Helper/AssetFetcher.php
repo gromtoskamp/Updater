@@ -57,8 +57,11 @@ class AssetFetcher
      */
     private function getUpdaterFile(): string
     {
+        $backtrace = debug_backtrace();
+        $relativeFilePath = str_replace('/Helper/AssetFetcher.php', '', $backtrace[0]['file']);
+
         foreach (debug_backtrace() as $traceItem) {
-            if (strpos($traceItem['file'], 'Groskampweb/Updater') === false) {
+            if (strpos($traceItem['file'], $relativeFilePath) === false) {
                 return $traceItem['file'];
             }
         }
